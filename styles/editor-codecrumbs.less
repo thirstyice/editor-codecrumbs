@@ -1,0 +1,142 @@
+// The ui-variables file is provided by base themes provided by Atom.
+//
+// See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
+// for a full listing of what's available.
+@import "ui-variables";
+@import "syntax-variables";
+
+@codecrumbs-height: 20px;
+@codecrumbs-width: 12px;
+@codecrumbs-background: @syntax-gutter-background-color;
+@codecrumbs-default-color: @syntax-background-color;
+@codecrumbs-max-width: 20ch;
+@codecrumbs-min-width: 5ch;
+@codecrumbs-font: 14px;
+
+@codecrumbs-storage-color: #4F3053;
+@codecrumbs-function-color: #133C72;
+@codecrumbs-property-color: #614C00;
+@codecrumbs-control-color: #682963;
+@codecrumbs-variable-color: #00494C;
+@codecrumbs-entity-color: #603E00;
+
+@colorize: {
+  background: @color;
+  &::after {
+    border-left-color: @color;
+  }
+  &:hover + .indent-codecrumbs__el::before {
+    border-left-color: @color;
+  }
+};
+.codecrumbsAddColor (@color, @token: '') {
+  .indent-codecrumbs {
+    &__el.@{token} when not (@token = '') {
+      @colorize();
+    }
+    &__el when (@token = '') {
+      @colorize();
+    }
+  }
+}
+atom-text-editor {
+  flex-direction: column;
+}
+indent-codecrumbs {
+	display: block;
+}
+.indent-codecrumbs {
+  display: flex;
+  flex-wrap: nowrap;
+  list-style: none;
+  overflow-x: scroll;
+  // color: @text-color-highlight;
+  margin: 0;
+  padding: 0;
+  &__el {
+    position: relative;
+    cursor: pointer;
+    &:not(:first-child)::before, &::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: 0;
+      bottom: 0;
+      pointer-events: none;
+    }
+    &:not(:first-child)::before {
+      left: 0;
+      z-index: 0;
+    }
+    &::after {
+      z-index: 1;
+    }
+    &:hover,
+    &:hover + &::before {
+      filter: brightness(150%);
+    }
+  }
+  &&_full > &__el {
+    max-width: none;
+    flex-grow: 1;
+  }
+  &__crumb-text {
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    padding-left: .25em;
+    padding-right: .25em;
+    white-space: nowrap;
+    &:before {
+      content: '';
+      display: inline-block;
+      vertical-align: middle;
+      height: 100%;
+      width: 0;
+      overflow: hidden;
+    }
+  }
+}
+.indent-codecrumbs {
+  background-color: @codecrumbs-background;
+  &__el {
+    height: @codecrumbs-height;
+    max-width: @codecrumbs-max-width;
+    min-width: @codecrumbs-min-width;
+    padding-left: 5px;
+    &:not(:first-child) {
+      padding-left: @codecrumbs-width + 2px;
+    }
+    &:not(:first-child)::before, &::after {
+      border-top: (@codecrumbs-height / 2) solid transparent;
+      border-bottom: (@codecrumbs-height / 2) solid transparent;
+    }
+    &:not(:first-child)::before {
+      border-left: @codecrumbs-width solid @codecrumbs-background;
+    }
+    &::after {
+      right: -@codecrumbs-width;
+      border-left: @codecrumbs-width solid @codecrumbs-default-color;
+    }
+    &:not(:last-child)::after {
+      right: -@codecrumbs-width + 2px;
+      top: 2px;
+      border-left-width: @codecrumbs-width - 2px;
+      border-top-width: (@codecrumbs-height / 2) - 2px;
+      border-bottom-width: (@codecrumbs-height / 2) - 2px;
+    }
+  }
+  &__crumb-text {
+    font-size: @codecrumbs-font;
+  }
+}
+.codecrumbsAddColor(@codecrumbs-default-color);
+.codecrumbsAddColor(@codecrumbs-entity-color, entity);
+.codecrumbsAddColor(@codecrumbs-storage-color, storage);
+.codecrumbsAddColor(@codecrumbs-property-color,  property);
+.codecrumbsAddColor(@codecrumbs-property-color, property-list);
+.codecrumbsAddColor(@codecrumbs-function-color,  function);
+.codecrumbsAddColor(@codecrumbs-control-color, control);
+.codecrumbsAddColor(@codecrumbs-variable-color, variable);
