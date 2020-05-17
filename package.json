@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "description": "Codecrumbs attached to the editor",
   "keywords": [],
-  "repository": "https://github.com/atom/codecrumbs",
+  "repository": "https://github.com/thirstyice/editor-codecrumbs",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
