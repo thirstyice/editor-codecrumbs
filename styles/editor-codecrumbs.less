@@ -9,7 +9,6 @@
 @codecrumbs-width: 12px;
 @codecrumbs-background: @syntax-gutter-background-color;
 @codecrumbs-default-color: @syntax-background-color;
-@codecrumbs-max-width: 20ch;
 @codecrumbs-min-width: 5ch;
 @codecrumbs-font: 14px;
 
@@ -33,6 +32,13 @@
   .indent-codecrumbs {
     &__el.@{token} when not (@token = '') {
       @colorize();
+      &testefaljsdflkajsd{
+        &sakldjflasdhfklajshdflkjhasdlkfjhasldkfjhaskljdfhklajdhflkasjhdfkljsahdfkljhasdklfjhasdlkfjhaslkdjhflkasdjhflkasjhfliuawhefliuawhefiuhaw{
+          &test{
+
+          }
+        }
+      }
     }
     &__el when (@token = '') {
       @colorize();
@@ -49,13 +55,17 @@ indent-codecrumbs {
   display: flex;
   flex-wrap: nowrap;
   list-style: none;
-  overflow-x: scroll;
   // color: @text-color-highlight;
   margin: 0;
   padding: 0;
   &__el {
     position: relative;
     cursor: pointer;
+    flex-basis: 0;
+    flex-grow: 1;
+    &:last-child {
+      flex-shrink: 0;
+    }
     &:not(:first-child)::before, &::after {
       content: "";
       position: absolute;
@@ -76,10 +86,6 @@ indent-codecrumbs {
     &:hover + &::before {
       filter: brightness(150%);
     }
-  }
-  &&_full > &__el {
-    max-width: none;
-    flex-grow: 1;
   }
   &__crumb-text {
     height: 100%;
@@ -103,7 +109,6 @@ indent-codecrumbs {
   background-color: @codecrumbs-background;
   &__el {
     height: @codecrumbs-height;
-    max-width: @codecrumbs-max-width;
     min-width: @codecrumbs-min-width;
     padding-left: 5px;
     &:not(:first-child) {
