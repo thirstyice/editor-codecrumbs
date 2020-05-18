@@ -1,7 +1,7 @@
 {
   "name": "editor-codecrumbs",
   "main": "./lib/editor-codecrumbs",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Codecrumbs attached to the editor",
   "keywords": [],
   "repository": "https://github.com/thirstyice/editor-codecrumbs",
